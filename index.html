@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Wiom Partner — PayG Quiz</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div id="app">
+
+  <!-- ======== Screen 1: Home ======== -->
+  <div id="screen-home" class="screen">
+    <div class="home-header">
+      <div class="home-header-left">
+        <div class="partner-icon">P+</div>
+        <div class="home-greeting">नमस्ते, रोहित</div>
+      </div>
+      <div class="home-header-right">
+        <div class="rating-badge">&#9733; 4.8</div>
+        <div class="menu-icon">&#9776;</div>
+      </div>
+    </div>
+
+    <div class="home-tabs">
+      <div class="home-tab active">नेटवर्क बढ़ायें</div>
+      <div class="home-tab">पैसा कमायें</div>
+    </div>
+
+    <div class="home-content">
+      <div class="booking-card">
+        <div>
+          <div class="booking-count">08</div>
+          <div class="booking-avatars">
+            <div class="avatar-dot"></div>
+            <div class="avatar-dot"></div>
+            <div class="avatar-dot"></div>
+            <div class="avatar-dot"></div>
+          </div>
+          <div class="booking-label">कस्टमर प्रतीक्षा कर रहे हैं</div>
+        </div>
+        <div class="booking-arrow">&rarr;</div>
+      </div>
+
+      <div class="home-stat">
+        <div class="home-stat-label">कुल एक्टिव कस्टमर</div>
+        <div class="home-stat-value">276</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======== Bottom Sheet Popup ======== -->
+  <div id="popup-overlay" class="overlay">
+    <div class="bottom-sheet">
+      <div class="popup-title">PayG सिस्टम अपडेट</div>
+      <div class="popup-body">
+        सभी नए कनेक्शन अब Pay-As-You-Go (PayG) model पर
+        होंगे और नये <u>सिस्टम के हिसाब से</u> काम करना है
+      </div>
+      <button id="btn-agree" class="btn-primary">मैं सहमत हूँ</button>
+      <button id="btn-leave" class="popup-secondary">मैं व्योम छोड़ना चाहता हूँ</button>
+    </div>
+  </div>
+
+  <!-- ======== Screen 2: Quiz ======== -->
+  <div id="screen-quiz" class="screen">
+    <div class="quiz-header">
+      <button id="quiz-back-btn" class="quiz-back">&larr;</button>
+      <div class="quiz-title">PayG समझ परीक्षण</div>
+    </div>
+    <div class="quiz-progress-bar">
+      <div id="progress-fill" class="quiz-progress-fill" style="width: 10%"></div>
+    </div>
+
+    <div class="quiz-body">
+      <div id="question-counter" class="quiz-counter">1/10</div>
+      <div id="question-text" class="quiz-question"></div>
+      <div id="options-container" class="quiz-options"></div>
+      <div id="feedback-box" class="quiz-feedback"></div>
+      <div id="action-box" class="quiz-action"></div>
+    </div>
+  </div>
+
+  <!-- ======== Screen 3: Success ======== -->
+  <div id="screen-success" class="screen success-screen">
+    <div class="success-badge">
+      <div class="badge-inner">
+        <span class="badge-icon">PayG</span>
+        <span class="badge-label">Certified</span>
+      </div>
+    </div>
+
+    <div class="success-title">बधाई हो!</div>
+    <div class="success-subtitle">
+      आपने PayG सिस्टम की सभी बातें समझ ली हैं। अब आपको हर सफल इंस्टॉल पर मिलेंगे
+    </div>
+    <div class="success-payout">&#8377;300 प्रति इंस्टॉल</div>
+
+    <div class="success-redirect">होम पर वापस जा रहे हैं...</div>
+    <div id="success-tap-btn" class="success-tap">अभी होम पर जाएं</div>
+  </div>
+
+  <!-- ======== Restart Toast ======== -->
+  <div id="restart-toast" class="restart-toast">
+    कोई बात नहीं! चलो फिर से शुरू करते हैं
+  </div>
+
+</div>
+
+<script src="quiz-data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

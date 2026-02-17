@@ -1,0 +1,304 @@
+
+WIOM MASTER EXPERIENCE HANDBOOK
+Complete & Exhaustive Documentation
+Version: Consolidated Master Reference
+
+====================================================================
+SECTION 1: FOUNDATIONAL PHILOSOPHY
+====================================================================
+
+1.1 WHY A DESIGN SYSTEM EXISTS
+
+As an early-stage startup operating in a dynamic environment, maintaining consistency across products and features is challenging. A Design System serves as:
+
+- Single source of truth
+- Alignment mechanism between design & development
+- Philosophy carrier
+- Communication standard
+- Reusable component library
+- Scalability framework
+
+It ensures:
+
+- Consistency
+- Efficiency
+- Scalability
+- Collaboration
+- Accessibility
+- Documentation clarity
+- Rapid prototyping
+- Brand alignment
+- Improved code quality
+- Knowledge sharing
+- Promotion of design philosophy
+
+Challenges (Cons):
+
+- Upfront investment
+- Maintenance overhead
+- Risk of overengineering
+- Resistance to change
+- Learning curve
+- Flexibility constraints
+
+====================================================================
+SECTION 2: UX WRITING PLAYBOOK (COMPLETE)
+====================================================================
+
+2.1 HINDI FIRST PHILOSOPHY
+
+“हिंदी ही हम हैं”
+
+Wiom writes in Hindi first because:
+
+- Majority of households understand Hindi better
+- Emotional relatability increases trust
+- Cultural connection strengthens brand
+
+Hindi is subjective and regionally varied.
+
+Terminology Validation:
+
+- Compare spellings via Google Trends
+- Use data-backed decision making
+- “Data never lies” principle
+
+2.2 CORE COPY CHARACTERISTICS
+
+All content must be:
+
+1. Easy to understand
+2. Properly communicate message
+3. Casual and conversational
+
+2.3 NO NEGATIVE WORDS PRINCIPLE
+
+Wiom radiates positivity.
+
+Avoid negative connotations unless strategically necessary.
+
+Reasons:
+
+1. Positive user perception
+2. Increased engagement
+3. Reduced frustration
+4. Encourages exploration
+5. Builds positive brand image
+
+2.4 AUDIENCE BEFORE CONTENT
+
+Before writing:
+
+- Who is the audience?
+- What do they need?
+- What is our goal?
+
+Checklist:
+
+1. Understand audience
+2. Define objective
+3. Use correct tone
+4. Highlight benefits
+5. Keep concise
+6. Include CTA
+
+2.5 CTA FRAMEWORK
+
+CTAs must:
+
+- Clearly inform next action
+- Reduce uncertainty
+- Prepare user mentally
+
+Rules:
+
+- 3 words ideal
+- 4–5 words acceptable
+- Clarity
+- Urgency
+- Value communication
+
+Casing:
+
+- 1–3 words → Title Case
+- 4+ words → Sentence case
+
+2.6 F-PATTERN PRINCIPLE
+
+User scanning behavior:
+
+- Start top-left
+- Horizontal scan
+- Drop down
+- Repeat
+
+Design Implication:
+
+- Critical info top-left
+- Strong hierarchy
+- Scannable structure
+
+2.7 STAY CASUAL, NOT INFORMAL
+
+Tone:
+
+- Friendly
+- Warm
+- Respectful
+
+Avoid:
+
+- Harshness
+- Over-familiarity
+- Commanding tone
+
+2.8 FAMILY BRAND POSITIONING
+
+Content must:
+
+- Be understandable by all family members
+- Cater to decision-makers
+- Feel inclusive
+
+2.9 BENEFIT FIRST, ACTION LATER
+
+Sequence:
+
+1. Show benefit
+2. Then prompt action
+
+Why:
+
+- Grabs attention
+- Increases intent
+- Motivates engagement
+
+2.10 KEEP IT SHORT & SIMPLE
+
+Users spend ~10 seconds per screen.
+
+- Remove fluff
+- Avoid overload
+- Deliver exact needed info
+
+2.11 USER PERSONALIZATION
+
+- Address user directly
+- Make interaction feel two-way
+- Build emotional bond
+
+2.12 POP-UP & ERROR STATES
+
+Must:
+
+- Be direct
+- Be clear
+- Avoid blame tone
+- Provide next action
+
+====================================================================
+SECTION 3: UX GUIDELINES
+====================================================================
+
+3.1 USER ACCEPTANCE TESTING (UAT)
+
+Purpose:
+
+- Validate functionality
+- Confirm usability
+- Test real-world interaction
+
+Process:
+
+- Stakeholders test
+- Provide feedback
+- Fix issues pre-launch
+
+3.2 USER-CENTRIC INSIGHT FRAMEWORK
+
+- Identify daily pain points
+- Understand mental models
+- Evaluate impact of each design change
+
+3.3 INFORMATION HIERARCHY
+
+Structure:
+
+Headline → Support → Benefit → CTA
+
+3.4 CONFIDENCE BUILDING
+
+Ensure:
+
+- Predictable flows
+- Step-by-step guidance
+- Clear expectations
+
+====================================================================
+SECTION 4: DESIGN SYSTEM ARCHITECTURE
+====================================================================
+
+4.1 ATOMIC DESIGN MODEL
+
+Atoms → Molecules → Organisms → Templates → Pages
+
+====================================================================
+SECTION 5: ATOMS (TOKEN DOCUMENTATION)
+====================================================================
+
+5.1 COLOR SYSTEM
+
+Brand Primary
+Old: #E5178F
+New: #D9008D
+
+Primitive Colors:
+
+Brand
+- brand/600 – #D9008D
+- brand/300 – #FFB2E4
+- brand/200 – #FFCCED
+- brand/100 – #FFE5F6
+
+Secondary
+- brand/secondary – #443152
+
+Gold Gradient
+- #D5AF4A → #F2E983 → #D5B14B
+
+Neutral
+- neutral/900 – #161021
+- neutral/800 – #352D42
+- neutral/700 – #665E75
+- neutral/500 – #A7A1B2
+- neutral/300 – #D7D3E0
+- neutral/200 – #E8E4F0
+- neutral/100 – #F1EDF7
+- neutral/white – #FAF9FC
+
+Positive
+- positive/600 – #008043
+- positive/300 – #A5E5C6
+- positive/200 – #C9F0DD
+- positive/100 – #E1FAED
+
+Negative
+- negative/600 – #E01E00
+- negative/300 – #FFBDB3
+- negative/200 – #FFD3CC
+- negative/100 – #FFE9E5
+
+Warning
+- warning/700 – #B85C00
+- warning/600 – #FF8000
+- warning/500 – #FFAA00
+- warning/200 – #FFE6CC
+
+Info
+- info/600 – #6D17CE
+- info/300 – #D6B2FF
+- info/200 – #E4CCFF
+- info/100 – #F1E5FF
+
+====================================================================
+END OF MASTER DOCUMENT
