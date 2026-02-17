@@ -587,6 +587,18 @@ body {
   color: var(--neutral-500);
 }
 
+.success-note {
+  background: var(--neutral-100);
+  border: 1px solid var(--neutral-300);
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 13px;
+  color: var(--neutral-700);
+  line-height: 1.6;
+  max-width: 320px;
+  margin-bottom: 24px;
+}
+
 .success-tap {
   margin-top: 12px;
   font-size: 13px;

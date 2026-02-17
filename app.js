@@ -41,9 +41,6 @@ document.getElementById('btn-agree').addEventListener('click', () => {
   startQuiz();
 });
 
-document.getElementById('btn-leave').addEventListener('click', () => {
-  overlay.classList.remove('active');
-});
 
 // === Quiz ===
 function startQuiz() {
