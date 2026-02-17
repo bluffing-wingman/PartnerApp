@@ -1,20 +1,51 @@
+// === Try loading admin overrides from localStorage ===
+var adminConfig = null;
+try {
+  var raw = localStorage.getItem('wiom_config');
+  if (raw) {
+    var parsed = JSON.parse(raw);
+    if (parsed && parsed.intro && Array.isArray(parsed.quiz) && parsed.quiz.length > 0 && parsed.success) {
+      adminConfig = parsed;
+    }
+  }
+} catch (e) { /* ignore */ }
+
+// Quiz data: use admin override if available, otherwise use quizData from quiz-data.js
+var activeQuizData = (adminConfig && adminConfig.quiz) || quizData;
+
+// === Apply admin overrides to DOM (intro + success text) ===
+if (adminConfig) {
+  if (adminConfig.intro) {
+    document.getElementById('intro-title').innerHTML = adminConfig.intro.title;
+    document.getElementById('intro-body').innerHTML = adminConfig.intro.body;
+    document.getElementById('btn-start-quiz').textContent = adminConfig.intro.cta;
+  }
+  if (adminConfig.success) {
+    document.getElementById('success-title').innerHTML = adminConfig.success.title;
+    document.getElementById('success-subtitle').innerHTML = adminConfig.success.subtitle;
+    document.getElementById('success-payout').innerHTML = adminConfig.success.payout;
+    document.getElementById('success-note').innerHTML = adminConfig.success.note;
+    document.getElementById('btn-close-modal').textContent = adminConfig.success.cta;
+  }
+}
+
 // === State ===
-let currentQuestion = 0;
-let quizPassed = localStorage.getItem('wiom_quiz_passed') === 'true';
-let answered = false;
+var currentQuestion = 0;
+var quizPassed = localStorage.getItem('wiom_quiz_passed') === 'true';
+var answered = false;
 
 // === DOM refs ===
-const modalOverlay = document.getElementById('modal-overlay');
-const stepIntro = document.getElementById('step-intro');
-const stepQuiz = document.getElementById('step-quiz');
-const stepSuccess = document.getElementById('step-success');
-const progressFill = document.getElementById('progress-fill');
-const questionCounter = document.getElementById('question-counter');
-const questionText = document.getElementById('question-text');
-const optionsContainer = document.getElementById('options-container');
-const feedbackBox = document.getElementById('feedback-box');
-const actionBox = document.getElementById('action-box');
-const restartToast = document.getElementById('restart-toast');
+var modalOverlay = document.getElementById('modal-overlay');
+var stepIntro = document.getElementById('step-intro');
+var stepQuiz = document.getElementById('step-quiz');
+var stepSuccess = document.getElementById('step-success');
+var progressFill = document.getElementById('progress-fill');
+var questionCounter = document.getElementById('question-counter');
+var questionText = document.getElementById('question-text');
+var optionsContainer = document.getElementById('options-container');
+var feedbackBox = document.getElementById('feedback-box');
+var actionBox = document.getElementById('action-box');
+var restartToast = document.getElementById('restart-toast');
 
 // === Modal step switching ===
 function showStep(step) {
@@ -25,15 +56,13 @@ function showStep(step) {
 }
 
 // === Init ===
-function init() {
-  if (!quizPassed) {
-    modalOverlay.classList.add('active');
-    showStep(stepIntro);
-  }
+if (!quizPassed) {
+  modalOverlay.classList.add('active');
+  showStep(stepIntro);
 }
 
 // === Start quiz from intro ===
-document.getElementById('btn-start-quiz').addEventListener('click', () => {
+document.getElementById('btn-start-quiz').addEventListener('click', function() {
   currentQuestion = 0;
   answered = false;
   showStep(stepQuiz);
@@ -43,11 +72,11 @@ document.getElementById('btn-start-quiz').addEventListener('click', () => {
 // === Quiz rendering ===
 function renderQuestion() {
   answered = false;
-  const q = quizData[currentQuestion];
-  const total = quizData.length;
+  var q = activeQuizData[currentQuestion];
+  var total = activeQuizData.length;
 
-  questionCounter.textContent = `${currentQuestion + 1}/${total}`;
-  progressFill.style.width = `${((currentQuestion + 1) / total) * 100}%`;
+  questionCounter.textContent = (currentQuestion + 1) + '/' + total;
+  progressFill.style.width = (((currentQuestion + 1) / total) * 100) + '%';
   questionText.textContent = q.question;
 
   feedbackBox.className = 'quiz-feedback';
@@ -55,15 +84,14 @@ function renderQuestion() {
   actionBox.className = 'quiz-action';
   actionBox.style.display = 'none';
 
-  const letters = ['A', 'B', 'C', 'D'];
-  optionsContainer.innerHTML = q.options.map((opt, i) => `
-    <div class="option-card" data-index="${i}" onclick="selectOption(${i})">
-      <div class="option-letter">${letters[i]}</div>
-      <div class="option-text">${opt}</div>
-    </div>
-  `).join('');
+  var letters = ['A', 'B', 'C', 'D'];
+  optionsContainer.innerHTML = q.options.map(function(opt, i) {
+    return '<div class="option-card" data-index="' + i + '" onclick="selectOption(' + i + ')">' +
+      '<div class="option-letter">' + letters[i] + '</div>' +
+      '<div class="option-text">' + opt + '</div>' +
+    '</div>';
+  }).join('');
 
-  // Scroll quiz content to top
   stepQuiz.querySelector('.quiz-content').scrollTop = 0;
 }
 
@@ -71,40 +99,35 @@ function selectOption(index) {
   if (answered) return;
   answered = true;
 
-  const q = quizData[currentQuestion];
-  const cards = optionsContainer.querySelectorAll('.option-card');
-  const isCorrect = index === q.correct;
+  var q = activeQuizData[currentQuestion];
+  var cards = optionsContainer.querySelectorAll('.option-card');
+  var isCorrect = index === q.correct;
 
-  // Disable all cards
-  cards.forEach(c => c.classList.add('disabled'));
+  cards.forEach(function(c) { c.classList.add('disabled'); });
 
-  // Highlight selected card only
   if (isCorrect) {
     cards[index].classList.add('correct');
   } else {
-    // Only highlight the wrong selection — do NOT reveal the correct one
     cards[index].classList.add('wrong');
   }
 
-  // Show feedback
-  feedbackBox.className = `quiz-feedback ${isCorrect ? 'correct' : 'wrong'} show`;
+  feedbackBox.className = 'quiz-feedback ' + (isCorrect ? 'correct' : 'wrong') + ' show';
   feedbackBox.innerHTML = isCorrect
-    ? `<span class="feedback-icon">&#10003;</span> सही जवाब! ${q.explanation}`
-    : `<span class="feedback-icon">&#10007;</span> गलत जवाब। ${q.explanation}`;
+    ? '<span class="feedback-icon">&#10003;</span> सही जवाब! ' + q.explanation
+    : '<span class="feedback-icon">&#10007;</span> गलत जवाब। ' + q.explanation;
   feedbackBox.style.display = 'block';
 
-  // Show action button
   actionBox.style.display = 'block';
   actionBox.className = 'quiz-action show';
 
   if (isCorrect) {
-    if (currentQuestion < quizData.length - 1) {
-      actionBox.innerHTML = `<button class="btn-next" onclick="nextQuestion()">अगला सवाल &rarr;</button>`;
+    if (currentQuestion < activeQuizData.length - 1) {
+      actionBox.innerHTML = '<button class="btn-next" onclick="nextQuestion()">अगला सवाल &rarr;</button>';
     } else {
-      actionBox.innerHTML = `<button class="btn-next" onclick="quizComplete()">पूरा हुआ &#10003;</button>`;
+      actionBox.innerHTML = '<button class="btn-next" onclick="quizComplete()">पूरा हुआ &#10003;</button>';
     }
   } else {
-    actionBox.innerHTML = `<button class="btn-restart" onclick="restartQuiz()">फिर से शुरू करें</button>`;
+    actionBox.innerHTML = '<button class="btn-restart" onclick="restartQuiz()">फिर से शुरू करें</button>';
   }
 }
 
@@ -117,9 +140,8 @@ function restartQuiz() {
   currentQuestion = 0;
   renderQuestion();
 
-  // Show toast
   restartToast.classList.add('show');
-  setTimeout(() => restartToast.classList.remove('show'), 2500);
+  setTimeout(function() { restartToast.classList.remove('show'); }, 2500);
 }
 
 function quizComplete() {
@@ -129,9 +151,6 @@ function quizComplete() {
 }
 
 // === Close modal from success screen ===
-document.getElementById('btn-close-modal').addEventListener('click', () => {
+document.getElementById('btn-close-modal').addEventListener('click', function() {
   modalOverlay.classList.remove('active');
 });
-
-// === Start ===
-init();

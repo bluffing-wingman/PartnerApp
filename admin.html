@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wiom Admin — PayG Quiz Content Manager</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+<header class="admin-header">
+  <div class="header-inner">
+    <div class="header-brand">Wiom Admin</div>
+    <div class="header-subtitle">PayG Quiz Content Manager</div>
+  </div>
+</header>
+
+<main class="admin-main">
+
+  <!-- Intro Modal Editor -->
+  <section class="editor-section">
+    <h2 class="section-title">Intro Modal</h2>
+    <div class="form-group">
+      <label for="intro-title">Title</label>
+      <input type="text" id="intro-title" class="form-input">
+    </div>
+    <div class="form-group">
+      <label for="intro-body">Body <span class="hint">(HTML allowed)</span></label>
+      <textarea id="intro-body" class="form-textarea" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="intro-cta">CTA Button Text</label>
+      <input type="text" id="intro-cta" class="form-input">
+    </div>
+  </section>
+
+  <!-- Quiz Editor -->
+  <section class="editor-section">
+    <h2 class="section-title">Quiz Questions</h2>
+    <div id="quiz-list"></div>
+    <button id="btn-add-question" class="btn-secondary">+ Add Question</button>
+  </section>
+
+  <!-- Success Screen Editor -->
+  <section class="editor-section">
+    <h2 class="section-title">Success Screen</h2>
+    <div class="form-group">
+      <label for="success-title">Title</label>
+      <input type="text" id="success-title" class="form-input">
+    </div>
+    <div class="form-group">
+      <label for="success-subtitle">Subtitle <span class="hint">(HTML allowed)</span></label>
+      <textarea id="success-subtitle" class="form-textarea" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="success-payout">Payout Text</label>
+      <input type="text" id="success-payout" class="form-input">
+    </div>
+    <div class="form-group">
+      <label for="success-note">Note</label>
+      <textarea id="success-note" class="form-textarea" rows="3"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="success-cta">CTA Button Text</label>
+      <input type="text" id="success-cta" class="form-input">
+    </div>
+  </section>
+
+  <!-- Actions -->
+  <section class="actions-bar">
+    <button id="btn-save" class="btn-primary">Save Config</button>
+    <button id="btn-reset" class="btn-danger">Reset to Defaults</button>
+    <button id="btn-preview" class="btn-secondary">Preview Partner App</button>
+  </section>
+
+  <div id="toast" class="admin-toast"></div>
+
+</main>
+
+<script src="quiz-data.js?v=2"></script>
+<script src="admin.js?v=2"></script>
+</body>
+</html>
