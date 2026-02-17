@@ -10,8 +10,8 @@
 
 <div id="app">
 
-  <!-- ======== Screen 1: Home ======== -->
-  <div id="screen-home" class="screen">
+  <!-- ======== Home Screen (always visible) ======== -->
+  <div id="screen-home" class="screen active">
     <div class="home-header">
       <div class="home-header-left">
         <div class="partner-icon">P+</div>
@@ -50,56 +50,58 @@
     </div>
   </div>
 
-  <!-- ======== Bottom Sheet Popup ======== -->
-  <div id="popup-overlay" class="overlay">
-    <div class="bottom-sheet">
-      <div class="popup-title">नया नियम: ₹300 हर नए इंस्टॉल पर!</div>
-      <div class="popup-body">
-        अब आपको हर <u>नए सफल इंस्टॉल</u> पर ₹300 मिलेंगे। इस नियम को चालू करने के लिए एक छोटा सा क्विज़ पूरा करें।
+  <!-- ======== Full-screen Modal (intro → quiz → success) ======== -->
+  <div id="modal-overlay" class="modal-overlay">
+    <div class="modal-sheet">
+
+      <!-- Step: Intro -->
+      <div id="step-intro" class="modal-step">
+        <div class="modal-step-content intro-content">
+          <div class="popup-title">नया नियम: ₹300 हर नए इंस्टॉल पर!</div>
+          <div class="popup-body">
+            अब आपको हर <u>नए सफल इंस्टॉल</u> पर ₹300 मिलेंगे। इस नियम को चालू करने के लिए एक छोटा सा क्विज़ पूरा करें।
+          </div>
+          <button id="btn-start-quiz" class="btn-primary">क्विज़ शुरू करें</button>
+        </div>
       </div>
-      <button id="btn-agree" class="btn-primary">क्विज़ शुरू करें</button>
-    </div>
-  </div>
 
-  <!-- ======== Screen 2: Quiz ======== -->
-  <div id="screen-quiz" class="screen">
-    <div class="quiz-header">
-      <button id="quiz-back-btn" class="quiz-back">&larr;</button>
-      <div class="quiz-title">PayG समझ परीक्षण</div>
-    </div>
-    <div class="quiz-progress-bar">
-      <div id="progress-fill" class="quiz-progress-fill" style="width: 10%"></div>
-    </div>
-
-    <div class="quiz-body">
-      <div id="question-counter" class="quiz-counter">1/10</div>
-      <div id="question-text" class="quiz-question"></div>
-      <div id="options-container" class="quiz-options"></div>
-      <div id="feedback-box" class="quiz-feedback"></div>
-      <div id="action-box" class="quiz-action"></div>
-    </div>
-  </div>
-
-  <!-- ======== Screen 3: Success ======== -->
-  <div id="screen-success" class="screen success-screen">
-    <div class="success-badge">
-      <div class="badge-inner">
-        <span class="badge-icon">PayG</span>
-        <span class="badge-label">Certified</span>
+      <!-- Step: Quiz -->
+      <div id="step-quiz" class="modal-step" style="display:none;">
+        <div class="quiz-progress-bar">
+          <div id="progress-fill" class="quiz-progress-fill" style="width:10%"></div>
+        </div>
+        <div class="modal-step-content quiz-content">
+          <div id="question-counter" class="quiz-counter">1/10</div>
+          <div id="question-text" class="quiz-question"></div>
+          <div id="options-container" class="quiz-options"></div>
+          <div id="feedback-box" class="quiz-feedback"></div>
+          <div id="action-box" class="quiz-action"></div>
+        </div>
       </div>
-    </div>
 
-    <div class="success-title">बधाई हो!</div>
-    <div class="success-subtitle">
-      आपने PayG सिस्टम की सभी बातें समझ ली हैं। अब आपको हर <strong>नए सफल इंस्टॉल</strong> पर मिलेंगे
-    </div>
-    <div class="success-payout">&#8377;300 प्रति नया इंस्टॉल</div>
-    <div class="success-note">
-      ध्यान दें: पुराना नियम (churned कस्टमर पर ₹300) अब लागू नहीं है। यह पेआउट सिर्फ नए इंस्टॉल पर मिलेगा।
-    </div>
+      <!-- Step: Success -->
+      <div id="step-success" class="modal-step" style="display:none;">
+        <div class="modal-step-content success-content">
+          <div class="success-badge">
+            <div class="badge-inner">
+              <span class="badge-icon">PayG</span>
+              <span class="badge-label">Certified</span>
+            </div>
+          </div>
 
-    <div class="success-redirect">होम पर वापस जा रहे हैं...</div>
-    <div id="success-tap-btn" class="success-tap">अभी होम पर जाएं</div>
+          <div class="success-title">बधाई हो!</div>
+          <div class="success-subtitle">
+            आपने PayG सिस्टम की सभी बातें समझ ली हैं। अब आपको हर <strong>नए सफल इंस्टॉल</strong> पर मिलेंगे
+          </div>
+          <div class="success-payout">&#8377;300 प्रति नया इंस्टॉल</div>
+          <div class="success-note">
+            ध्यान दें: पुराना नियम (churned कस्टमर पर ₹300) अब लागू नहीं है। यह पेआउट सिर्फ नए इंस्टॉल पर मिलेगा।
+          </div>
+          <button id="btn-close-modal" class="btn-primary">आगे बढ़ें</button>
+        </div>
+      </div>
+
+    </div>
   </div>
 
   <!-- ======== Restart Toast ======== -->

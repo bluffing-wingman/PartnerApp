@@ -1,17 +1,13 @@
 // === State ===
-let currentScreen = 'home';
 let currentQuestion = 0;
 let quizPassed = localStorage.getItem('wiom_quiz_passed') === 'true';
 let answered = false;
-let redirectTimer = null;
 
 // === DOM refs ===
-const screens = {
-  home: document.getElementById('screen-home'),
-  quiz: document.getElementById('screen-quiz'),
-  success: document.getElementById('screen-success')
-};
-const overlay = document.getElementById('popup-overlay');
+const modalOverlay = document.getElementById('modal-overlay');
+const stepIntro = document.getElementById('step-intro');
+const stepQuiz = document.getElementById('step-quiz');
+const stepSuccess = document.getElementById('step-success');
 const progressFill = document.getElementById('progress-fill');
 const questionCounter = document.getElementById('question-counter');
 const questionText = document.getElementById('question-text');
@@ -20,36 +16,31 @@ const feedbackBox = document.getElementById('feedback-box');
 const actionBox = document.getElementById('action-box');
 const restartToast = document.getElementById('restart-toast');
 
-// === Navigation ===
-function showScreen(name) {
-  Object.values(screens).forEach(s => s.classList.remove('active'));
-  screens[name].classList.add('active');
-  currentScreen = name;
+// === Modal step switching ===
+function showStep(step) {
+  stepIntro.style.display = 'none';
+  stepQuiz.style.display = 'none';
+  stepSuccess.style.display = 'none';
+  step.style.display = 'flex';
 }
 
 // === Init ===
 function init() {
-  showScreen('home');
   if (!quizPassed) {
-    setTimeout(() => overlay.classList.add('active'), 400);
+    modalOverlay.classList.add('active');
+    showStep(stepIntro);
   }
 }
 
-// === Popup actions ===
-document.getElementById('btn-agree').addEventListener('click', () => {
-  overlay.classList.remove('active');
-  startQuiz();
-});
-
-
-// === Quiz ===
-function startQuiz() {
+// === Start quiz from intro ===
+document.getElementById('btn-start-quiz').addEventListener('click', () => {
   currentQuestion = 0;
   answered = false;
-  showScreen('quiz');
+  showStep(stepQuiz);
   renderQuestion();
-}
+});
 
+// === Quiz rendering ===
 function renderQuestion() {
   answered = false;
   const q = quizData[currentQuestion];
@@ -71,6 +62,9 @@ function renderQuestion() {
       <div class="option-text">${opt}</div>
     </div>
   `).join('');
+
+  // Scroll quiz content to top
+  stepQuiz.querySelector('.quiz-content').scrollTop = 0;
 }
 
 function selectOption(index) {
@@ -84,12 +78,12 @@ function selectOption(index) {
   // Disable all cards
   cards.forEach(c => c.classList.add('disabled'));
 
-  // Highlight selected
+  // Highlight selected card only
   if (isCorrect) {
     cards[index].classList.add('correct');
   } else {
+    // Only highlight the wrong selection — do NOT reveal the correct one
     cards[index].classList.add('wrong');
-    cards[q.correct].classList.add('correct');
   }
 
   // Show feedback
@@ -131,26 +125,12 @@ function restartQuiz() {
 function quizComplete() {
   quizPassed = true;
   localStorage.setItem('wiom_quiz_passed', 'true');
-  showScreen('success');
-
-  // Auto-redirect after 3s
-  redirectTimer = setTimeout(() => {
-    showScreen('home');
-  }, 3000);
+  showStep(stepSuccess);
 }
 
-// === Success tap to go home ===
-document.getElementById('success-tap-btn').addEventListener('click', () => {
-  if (redirectTimer) clearTimeout(redirectTimer);
-  showScreen('home');
-});
-
-// === Quiz back button ===
-document.getElementById('quiz-back-btn').addEventListener('click', () => {
-  showScreen('home');
-  if (!quizPassed) {
-    setTimeout(() => overlay.classList.add('active'), 300);
-  }
+// === Close modal from success screen ===
+document.getElementById('btn-close-modal').addEventListener('click', () => {
+  modalOverlay.classList.remove('active');
 });
 
 // === Start ===
